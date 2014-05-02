@@ -10,7 +10,6 @@
   },
   "dependencies" : {
     "xmlrpc"    : "latest",
-    "request": "*",
-    "cheerio": "*"
+    "async": "*"
   }
 }

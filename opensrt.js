@@ -22,17 +22,16 @@ exports.searchEpisode = function(data, cb) {
 				return cb(err, null);
 			}
 			data.token = token;
-			searchEpisode(data, cb);
+			return searchEpisode(data, cb);
 		});
 	}
 
 	else {
-		searchEpisode(data, cb);
+		return searchEpisode(data, cb);
 	}
 }
 
 function searchEpisode(data, cb) {
-	var subs = [];
 	client.methodCall('SearchSubtitles', [
 			data.token, 
 			[
@@ -46,7 +45,7 @@ function searchEpisode(data, cb) {
 		], 
 		function(err, res){
 			if(err) return cb(err, null);
-
+			var subs = {};
 			async.eachSeries(res.data, function(sub, callback) {
 				var tmp = {};
 				tmp.url = sub.SubDownloadLink.replace(".gz", ".srt");
@@ -62,8 +61,8 @@ function searchEpisode(data, cb) {
 				}
 				return callback();
 			},
-			function(err, res) {
-				cb(err, subs);
+			function(err) {
+				return cb(err, subs);
 			})
 		})
 	}

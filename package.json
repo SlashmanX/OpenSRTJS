@@ -1,12 +1,12 @@
 {
   "name"         : "opensrt_js",
-  "version"      : "0.0.2",
+  "version"      : "0.0.3",
   "description"  : "Node.js API for Opensubtitles.org",
   "author"       : "SlashmanX",
   "main"         : "opensrt.js",
   "repository"   : { 
     "type"       : "git", 
-    "url"        : "http://github.com/SlashmanX/eztv_api.git"
+    "url"        : "http://github.com/SlashmanX/OpenSRTJS.git"
   },
   "dependencies" : {
     "xmlrpc"    : "latest",

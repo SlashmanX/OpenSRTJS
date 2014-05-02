@@ -49,7 +49,7 @@ function searchEpisode(data, cb) {
 
 			async.eachSeries(res.data, function(sub, callback) {
 				var tmp = {};
-				tmp.srtLink = sub.SubDownloadLink.replace(".gz", ".srt");
+				tmp.url = sub.SubDownloadLink.replace(".gz", ".srt");
 				tmp.lang = sub.ISO639;
 				tmp.downloads = sub.SubDownloadsCnt;
 				if(!subs[tmp.lang]) {

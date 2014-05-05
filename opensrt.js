@@ -16,7 +16,7 @@ exports.getToken = function getToken(cb) {
 },
 
 exports.searchEpisode = function(data, cb) {
-	if(!token && !data.token) {
+	if(!data.token) {
 		exports.getToken(function(err, token) {
 			if(err) {
 				return cb(err, null);

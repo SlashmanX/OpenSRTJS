@@ -1,7 +1,7 @@
 var xmlrpc = require("xmlrpc");
 var async = require("async");
 
-var USER_AGENT = "OpenSubtitlesPlayer v4.7";
+var USER_AGENT = "OpenSRTJS";
 
 var client = xmlrpc.createClient({ host: 'api.opensubtitles.org', port: 80, path: '/xml-rpc'})
 

@@ -39,7 +39,8 @@ function searchEpisode(data, cb) {
 					sublanaguageid: "all", 
 					imdbid: data.imdbid.replace("tt", ""), 
 					season: data.season, 
-					episode: data.episode
+					episode: data.episode,
+					tag: data.filename
 				}
 			]
 		], 
@@ -51,11 +52,14 @@ function searchEpisode(data, cb) {
 				tmp.url = sub.SubDownloadLink.replace(".gz", ".srt");
 				tmp.lang = sub.ISO639;
 				tmp.downloads = sub.SubDownloadsCnt;
+				tmp.byTag = (sub.MatchedBy == "tag");
 				if(!subs[tmp.lang]) {
 					subs[tmp.lang] = tmp;
 				}
 				else {
-					if(tmp.downloads > subs[tmp.lang].downloads) { // Most downloaded seems a good metric for best subtitle
+					if((tmp.byTag && !subs[tmp.lang].byTag) || 
+					(tmp.downloads > subs[tmp.lang].downloads && tmp.byTag)) { 
+					// Get most download with tag match taking precedence
 						subs[tmp.lang] = tmp;
 					}
 				}

@@ -58,7 +58,7 @@ function searchEpisode(data, cb) {
 				}
 				else {
 					if((tmp.byTag && !subs[tmp.lang].byTag) || 
-					(tmp.downloads > subs[tmp.lang].downloads && (!tmp.byTag && !subs[tmp.lang].byTag)) { 
+					(tmp.downloads > subs[tmp.lang].downloads && (!tmp.byTag && !subs[tmp.lang].byTag))) { 
 					// Get most download with tag match taking precedence
 						subs[tmp.lang] = tmp;
 					}

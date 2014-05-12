@@ -52,14 +52,16 @@ function searchEpisode(data, cb) {
 				tmp.url = sub.SubDownloadLink.replace(".gz", ".srt");
 				tmp.lang = sub.ISO639;
 				tmp.downloads = sub.SubDownloadsCnt;
-				tmp.byTag = (sub.MatchedBy == "tag");
+				tmp.score = 0;
+
+				if(tmp.MatchedBy == "tag") tmp.score += 50;
+				if(tmp.UserRank == "trusted") tmp.score += 100;
 				if(!subs[tmp.lang]) {
 					subs[tmp.lang] = tmp;
 				}
 				else {
-					if((tmp.byTag && !subs[tmp.lang].byTag) || 
-					(tmp.downloads > subs[tmp.lang].downloads && (!tmp.byTag && !subs[tmp.lang].byTag))) { 
-					// Get most download with tag match taking precedence
+					// If score is 0 or equal, sort by downloads
+					if(tmp.score > subs[tmp.lang].score || (tmp.score == subs[tmp.lang].score && tmp.downloads > subs[tmp.lang].score.downloads) { 
 						subs[tmp.lang] = tmp;
 					}
 				}

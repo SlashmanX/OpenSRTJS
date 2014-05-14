@@ -32,20 +32,32 @@ exports.searchEpisode = function(data, cb) {
 }
 
 function searchEpisode(data, cb) {
+	var opts = {};
+	opts.sublanaguageid = "all";
+	if(!data.filename) {
+		opts.imdbid = data.imdbid.replace("tt", "");
+		opts.season = data.season;
+		opts.episode = data.episode;
+	}
+	else {
+		opts.tag = data.filename;
+	}
 	client.methodCall('SearchSubtitles', [
 			data.token, 
 			[
-				{
-					sublanaguageid: "all", 
-					imdbid: data.imdbid.replace("tt", ""), 
-					season: data.season, 
-					episode: data.episode,
-					tag: data.filename
-				}
+				opts
 			]
 		], 
 		function(err, res){
 			if(err) return cb(err, null);
+			if(!res.data && opts.tag) {
+				return searchEpisode({
+					imdbid: data.imdbid.replace("tt", ""), 
+					season: data.season, 
+					episode: data.episode,
+					token: data.token
+				}, cb);
+			}
 			var subs = {};
 			async.eachSeries(res.data, function(sub, callback) {
 				var tmp = {};
@@ -53,7 +65,6 @@ function searchEpisode(data, cb) {
 				tmp.lang = sub.ISO639;
 				tmp.downloads = sub.SubDownloadsCnt;
 				tmp.score = 0;
-
 				if(sub.MatchedBy == "tag") tmp.score += 50;
 				if(sub.UserRank == "trusted") tmp.score += 100;
 				if(!subs[tmp.lang]) {

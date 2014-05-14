@@ -54,8 +54,8 @@ function searchEpisode(data, cb) {
 				tmp.downloads = sub.SubDownloadsCnt;
 				tmp.score = 0;
 
-				if(tmp.MatchedBy == "tag") tmp.score += 50;
-				if(tmp.UserRank == "trusted") tmp.score += 100;
+				if(sub.MatchedBy == "tag") tmp.score += 50;
+				if(sub.UserRank == "trusted") tmp.score += 100;
 				if(!subs[tmp.lang]) {
 					subs[tmp.lang] = tmp;
 				}

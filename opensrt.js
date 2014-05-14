@@ -61,7 +61,7 @@ function searchEpisode(data, cb) {
 				}
 				else {
 					// If score is 0 or equal, sort by downloads
-					if(tmp.score > subs[tmp.lang].score || (tmp.score == subs[tmp.lang].score && tmp.downloads > subs[tmp.lang].score.downloads) { 
+					if(tmp.score > subs[tmp.lang].score || (tmp.score == subs[tmp.lang].score && tmp.downloads > subs[tmp.lang].score.downloads)) { 
 						subs[tmp.lang] = tmp;
 					}
 				}

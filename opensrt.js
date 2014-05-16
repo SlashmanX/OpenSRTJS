@@ -50,7 +50,7 @@ function searchEpisode(data, cb) {
 		], 
 		function(err, res){
 			if(err) return cb(err, null);
-			if(!res.data && opts.tag) {
+			if(!res.data && opts.tag && data.imdbid && data.season && data.episode) { // If can't find subs by tag, fallback to show/season/episode
 				return searchEpisode({
 					imdbid: data.imdbid.replace("tt", ""), 
 					season: data.season, 

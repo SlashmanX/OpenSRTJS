@@ -60,6 +60,7 @@ function searchEpisode(data, cb) {
 			}
 			var subs = {};
 			async.eachSeries(res.data, function(sub, callback) {
+				if(sub.SubFormat != "srt")  return callback();
 				if(data.season && data.episode) {// definitely an episode check 
 					if(sub.SeriesIMDBParent != data.imdbid.replace("tt", "")) return callback();
 					if(sub.SeriesSeason != data.season) return callback();

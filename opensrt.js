@@ -62,7 +62,7 @@ function searchEpisode(data, cb) {
 			async.eachSeries(res.data, function(sub, callback) {
 				if(sub.SubFormat != "srt")  return callback();
 				if(data.season && data.episode) {// definitely an episode check 
-					if(sub.SeriesIMDBParent != data.imdbid.replace("tt", "")) return callback();
+					if(parseInt(sub.SeriesIMDBParent, 10) != parseInt(data.imdbid.replace("tt", ""), 10)) return callback();
 					if(sub.SeriesSeason != data.season) return callback();
 					if(sub.SeriesEpisode != data.episode) return callback();
 				}

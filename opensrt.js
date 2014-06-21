@@ -50,14 +50,6 @@ function searchEpisode(data, cb) {
 		], 
 		function(err, res){
 			if(err) return cb(err, null);
-			if(!res.data && opts.tag && data.imdbid && data.season && data.episode) { // If can't find subs by tag, fallback to show/season/episode
-				return searchEpisode({
-					imdbid: data.imdbid.replace("tt", ""), 
-					season: data.season, 
-					episode: data.episode,
-					token: data.token
-				}, cb);
-			}
 			var subs = {};
 			async.eachSeries(res.data, function(sub, callback) {
 				if(sub.SubFormat != "srt")  return callback();
@@ -86,7 +78,19 @@ function searchEpisode(data, cb) {
 				return callback();
 			},
 			function(err) {
-				return cb(err, subs);
+				// Do 1 extra query by imdb / season / episode in case no tag match for a lang
+				if(!data.recheck && data.imdbid && data.season && data.episode) {
+					return searchEpisode({
+						imdbid: data.imdbid.replace("tt", ""), 
+						season: data.season, 
+						episode: data.episode,
+						recheck: true,
+						token: data.token
+					}, cb);
+				}
+				else {
+					return cb(err, subs);
+				}
 			})
 		})
 	}

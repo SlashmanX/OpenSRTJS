@@ -33,7 +33,7 @@ exports.searchEpisode = function(data, cb) {
 
 function searchEpisode(data, cb) {
 	var opts = {};
-	opts.sublanaguageid = "all";
+	opts.sublanguageid = "all";
 	if(!data.filename) {
 		opts.imdbid = data.imdbid.replace("tt", "");
 		opts.season = data.season;

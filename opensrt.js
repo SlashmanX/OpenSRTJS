@@ -34,6 +34,11 @@ exports.searchEpisode = function(data, cb) {
 function searchEpisode(data, cb) {
 	var opts = {};
 	opts.sublanguageid = "all";
+
+	// Do a hash or filename check first (either), then fallback to imdb+season+episode
+	if(data.hash) {
+		opts.moviehash = hash;
+	}
 	if(!data.filename) {
 		opts.imdbid = data.imdbid.replace("tt", "");
 		opts.season = data.season;
@@ -63,7 +68,8 @@ function searchEpisode(data, cb) {
 				tmp.lang = sub.ISO639;
 				tmp.downloads = sub.SubDownloadsCnt;
 				tmp.score = 0;
-				
+
+				if(sub.MatchedBy == "moviehash") tmp.score += 100;
 				if(sub.MatchedBy == "tag") tmp.score += 50;
 				if(sub.UserRank == "trusted") tmp.score += 100;
 				if(!subs[tmp.lang]) {

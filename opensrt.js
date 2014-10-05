@@ -54,7 +54,7 @@ function searchEpisode(data, cb) {
 			]
 		], 
 		function(err, res){
-			if(err) return cb(err, null);
+			if(err  || typeof res.data === 'undefined') return cb(err, null);
 			var subs = {};
 			async.eachSeries(res.data, function(sub, callback) {
 				if(sub.SubFormat != "srt")  return callback();

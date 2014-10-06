@@ -1,6 +1,6 @@
 {
   "name"         : "opensrt_js",
-  "version"      : "0.0.17",
+  "version"      : "0.0.18",
   "description"  : "Node.js API for Opensubtitles.org",
   "author"       : "SlashmanX",
   "main"         : "opensrt.js",

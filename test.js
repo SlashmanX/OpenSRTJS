@@ -1,6 +1,4 @@
 var opensrt = require("./opensrt.js");
-var token = "";
-var zlib = require("zlib");
 
 var query = {
 	imdbid: "tt1844624", 
@@ -9,7 +7,7 @@ var query = {
 	filename: "American.Horror.Story.S02E03.720p.HDTV.X264-DIMENSION"
 }
 
-var OpenSRT = new opensrt('OpenSRTJS');
+var OpenSRT = new opensrt('OpenSRTJS'); // REPLACE WITH YOUR USER AGENT
 
 OpenSRT.searchEpisode(query, function(err, res){
 	if(err) return console.error("Error: "+ err);

@@ -7,7 +7,7 @@ var query = {
 	filename: "American.Horror.Story.S02E03.720p.HDTV.X264-DIMENSION"
 }
 
-var OpenSRT = new opensrt('OpenSRTJS'); // REPLACE WITH YOUR USER AGENT
+var OpenSRT = new opensrt('OSTestUserAgent'); // REPLACE WITH YOUR USER AGENT
 
 OpenSRT.searchEpisode(query, function(err, res){
 	if(err) return console.error("Error: "+ err);
